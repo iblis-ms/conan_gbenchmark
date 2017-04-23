@@ -1,0 +1,55 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/iblis/workspaces/github/conan_gbenchmark/test_package/build/da39a3ee5e6b4b0d3255bfef95601890afd80709/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_4faad/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4faad.dir/build.make CMakeFiles/cmTC_4faad.dir/build
+make[1]: Entering directory '/home/iblis/workspaces/github/conan_gbenchmark/test_package/build/da39a3ee5e6b4b0d3255bfef95601890afd80709/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_4faad.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++     -m64    -o CMakeFiles/cmTC_4faad.dir/CheckSymbolExists.cxx.o -c /home/iblis/workspaces/github/conan_gbenchmark/test_package/build/da39a3ee5e6b4b0d3255bfef95601890afd80709/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTC_4faad
+/home/iblis/programs/cmake/cmake-3.5.2-Linux-x86_64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4faad.dir/link.txt --verbose=1
+/usr/bin/c++     -m64     CMakeFiles/cmTC_4faad.dir/CheckSymbolExists.cxx.o  -o cmTC_4faad -rdynamic 
+CMakeFiles/cmTC_4faad.dir/CheckSymbolExists.cxx.o: In function `main':
+CheckSymbolExists.cxx:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_4faad.dir/build.make:97: recipe for target 'cmTC_4faad' failed
+make[1]: *** [cmTC_4faad] Error 1
+make[1]: Leaving directory '/home/iblis/workspaces/github/conan_gbenchmark/test_package/build/da39a3ee5e6b4b0d3255bfef95601890afd80709/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_4faad/fast' failed
+make: *** [cmTC_4faad/fast] Error 2
+
+File /home/iblis/workspaces/github/conan_gbenchmark/test_package/build/da39a3ee5e6b4b0d3255bfef95601890afd80709/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/iblis/workspaces/github/conan_gbenchmark/test_package/build/da39a3ee5e6b4b0d3255bfef95601890afd80709/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_526ee/fast"
+/usr/bin/make -f CMakeFiles/cmTC_526ee.dir/build.make CMakeFiles/cmTC_526ee.dir/build
+make[1]: Entering directory '/home/iblis/workspaces/github/conan_gbenchmark/test_package/build/da39a3ee5e6b4b0d3255bfef95601890afd80709/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_526ee.dir/CheckFunctionExists.cxx.o
+/usr/bin/c++     -m64 -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_526ee.dir/CheckFunctionExists.cxx.o -c /home/iblis/workspaces/github/conan_gbenchmark/test_package/build/da39a3ee5e6b4b0d3255bfef95601890afd80709/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_526ee
+/home/iblis/programs/cmake/cmake-3.5.2-Linux-x86_64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_526ee.dir/link.txt --verbose=1
+/usr/bin/c++     -m64 -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_526ee.dir/CheckFunctionExists.cxx.o  -o cmTC_526ee -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_526ee.dir/build.make:97: recipe for target 'cmTC_526ee' failed
+make[1]: *** [cmTC_526ee] Error 1
+make[1]: Leaving directory '/home/iblis/workspaces/github/conan_gbenchmark/test_package/build/da39a3ee5e6b4b0d3255bfef95601890afd80709/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_526ee/fast' failed
+make: *** [cmTC_526ee/fast] Error 2
+
+
