@@ -17,7 +17,10 @@ def runTest(command, prefixCommands = []):
   print("-----------------------------------------------")
   print(command)
   print("-----------------------------------------------")
-  fullCommand = ";".join(commands)
+  if platform.system() == "Windows":
+    fullCommand = " & ".join(commands)
+  else:
+    fullCommand = ";".join(commands)
   runCommand(fullCommand)
 
 class TestData(object):
@@ -37,9 +40,11 @@ class GccClangTestData(TestData):
     self.libcpp = libcpp
 
   def run(self):
-    prefixCommands = None
+    prefixCommands = []
     if platform.system() == "Windows":
-      pass #to be done
+      command1 = "SET CC=C:\\Program Files\\mingw-w64\\%s\\mingw64\\bin\\%s.exe" % (self.compilerVersion, self.compilerCC)
+      command2 = "SET CXX=C:\\Program Files\\mingw-w64\\%s\\mingw64\\bin\\%s.exe" % (self.compilerVersion, self.compilerCXX)
+      prefixCommands = [command1, command2]
     else:
       pathPrefix = "/usr/bin/"
       command1 = "export CC=%s%s-%s" % (pathPrefix, self.compilerCC, self.compilerVersion)
@@ -55,8 +60,8 @@ class GccClangTestData(TestData):
     return GccClangTestData("clang", "clang++", version, "clang", version, ["libc++", "libstdc++11", "libstdc++"])
 
   @staticmethod
-  def createGccData(linuxVersion, conanVersion):
-    return GccClangTestData("gcc", "g++", linuxVersion, "gcc", conanVersion, ["libstdc++11", "libstdc++"])
+  def createGccData(fileSuffixVersion, conanVersion):
+    return GccClangTestData("gcc", "g++", fileSuffixVersion, "gcc", conanVersion, ["libstdc++11", "libstdc++"])
 
 
 class VisualStudioTestData(TestData):
@@ -81,7 +86,8 @@ if __name__ == "__main__":
 
   if platform.system() == "Windows":
     testData = [VisualStudioTestData.createClangData("15"),
-                GccClangTestData.createGccData("6", "6.3")]
+                GccClangTestData.createGccData("x86_64-6.3.0-posix-seh-rt_v5-rev2", "6.3"),
+                GccClangTestData.createGccData("x86_64-5.4.0-posix-seh-rt_v5-rev0", "5.4")]
   else:
     testData = [GccClangTestData.createClangData("4.0"),
                 GccClangTestData.createClangData("3.9"),
