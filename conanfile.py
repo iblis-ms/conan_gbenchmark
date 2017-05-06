@@ -4,9 +4,7 @@
 from conans import ConanFile, CMake, tools
 from conans.model.settings import Settings
 from conans.tools import get
-import os
-
-from conans import *
+from os import path
 
 
 class GbenchmarkConan(ConanFile):
@@ -38,11 +36,10 @@ class GbenchmarkConan(ConanFile):
             if val is not None:
                 cmake.definitions[opt] = val
 
-        settingsConverted = Settings()
-        if settingsConverted.get_safe('compiler.libcxx') == 'libc++':
+        if self.settings.compiler != 'Visual Studio' and str(self.settings.compiler.libcxx) == 'libc++':
             cmake.definitions['BENCHMARK_USE_LIBCXX'] = 'ON'
 
-        codePath = os.path.join(self._conanfile_directory, self.source_root)
+        codePath = path.join(self._conanfile_directory, self.source_root)
         cmake.configure(source_dir=codePath, build_dir='_build')
         
         cmake.build()
@@ -57,5 +54,5 @@ class GbenchmarkConan(ConanFile):
 
     def package_info(self):  
         self.cpp_info.libs = ['benchmark']
-        if Settings().get_safe('os') == 'Windows':
+        if self.settings.os == 'Windows':
             self.cpp_info.libs.extend(['Shlwapi']) 
