@@ -1,34 +1,13 @@
+os: linux
 language: c++
 
-matrix:
-  include:
-    - os: linux
-      compiler: gcc
-      sudo: required
-      service: docker
-    - os: linux
-      compiler: clang
-      sudo: required
-      service: docker
-    - os: osx
-      compiler: gcc
-      service: docker
-    - os: osx
-      compiler: clang
-      service: docker
+sudo: required
 
-addons:
-  apt:
-    sources:
-    - george-edison55-precise-backports 
-    packages:
-    - cmake
-    - cmake-data
-
-
+services:
+- docker
 
 before_install:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install docker; docker build -t conan_gbenchmark .; fi
+- docker build -t conan_gbenchmark .
 
 script:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker run conan_gbenchmark /bin/bash -c "cd /test; ./runTest.py" ; fi
+- docker run conan_gbenchmark /bin/bash -c "cd /test && ./runTest.py && ./runTestPrograms.sh"
