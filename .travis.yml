@@ -1,7 +1,26 @@
 os: linux
 language: c++
 
-sudo: required
+matrix:
+  include:
+    - os: linux
+      compiler: gcc
+      sudo: required
+    - os: linux
+      compiler: clang
+      sudo: required
+    - os: osx
+      compiler: gcc
+    - os: osx
+      compiler: clang
+
+addons:
+  apt:
+    sources:
+    - george-edison55-precise-backports 
+    packages:
+    - cmake
+    - cmake-data
 
 services:
 - docker

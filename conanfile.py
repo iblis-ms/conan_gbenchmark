@@ -8,7 +8,7 @@ from os import path
 
 
 class GbenchmarkConan(ConanFile):
-    name = 'gbenchmark'
+    name = 'GBenchmark'
     version = '1.1.0'
     license = 'MIT LIcence'
     url = 'https://github.com/iblis-ms/conan_gbenchmark/tree/development'

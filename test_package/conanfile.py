@@ -4,12 +4,12 @@
 from conans import ConanFile, CMake
 import os
 
-channel = os.getenv("CONAN_CHANNEL", "testing")
+channel = os.getenv("CONAN_CHANNEL", "stable")
 username = os.getenv("CONAN_USERNAME", "iblis_ms")
 
 class GbenchmarkTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
-    requires = "gbenchmark/1.1.0@%s/%s" % (username, channel)
+    requires = "GBenchmark/1.1.0@%s/%s" % (username, channel)
     generators = "cmake"
 
     def build(self):
@@ -25,4 +25,3 @@ class GbenchmarkTestConan(ConanFile):
     def test(self):
         os.chdir("bin")
         self.run(".%sexample" % os.sep)
-

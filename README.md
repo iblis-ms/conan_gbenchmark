@@ -1,6 +1,12 @@
 #conan-gbenchmark
 
-Conan.io ([version 0.22.3](https://github.com/conan-io/conan/releases/download/0.22.3/conan-ubuntu-64_0_22_3.deb)) is C/C++ package manager. 
+Conan.io ([version 0.22.3](https://github.com/conan-io/conan/releases/download/0.22.3/conan-ubuntu-64_0_22_3.deb)) is C/C++ package manager. It allows downloading, compiling external libraries for specific operating system, architecture or with given compilation flags. Conan.io can be extremely helpful with big project with many components by automatic downloading (and building if required) required components.
+
+#How to use it?
+Conan.io's documentation of uploading packages to your server is on http://docs.conan.io/en/latest/packaging/upload.html.
+However, you can easily follow steps below:
+* download this repository
+* 
 
 
 
