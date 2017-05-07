@@ -28,7 +28,7 @@ addons:
 
 
 before_install:
-- docker build -t conan_gbenchmark .
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install docker; docker build -t conan_gbenchmark .; fi
 
 script:
-- docker run conan_gbenchmark /bin/bash -c "cd /test; ./runTest.py"
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker run conan_gbenchmark /bin/bash -c "cd /test; ./runTest.py" ; fi
