@@ -1,9 +1,12 @@
-#conan-gbenchmark
+# Conan.io with Google Benchmark
+
+[![Build Status](https://travis-ci.org/iblis-ms/conan_gbenchmark.svg?branch=master)](https://travis-ci.org/iblis-ms/conan_gbenchmark)
 
 Conan.io ([version 0.22.3](https://github.com/conan-io/conan/releases/download/0.22.3/conan-ubuntu-64_0_22_3.deb)) is C/C++ package manager. It allows downloading, compiling external libraries for specific operating system, architecture or with given compilation flags. Conan.io can be extremely helpful with big project with many components by automatic downloading (and building if required) required components.
 This repository contains configuration files to use Google Benchmark 1.1.0 with your code. 
 
-#How to use it?
+# How to use it?
+
 Conan.io's documentation of uploading packages to your server is on [http://docs.conan.io/en/latest/packaging/upload.html].
 However, you can easily follow steps below:
 * Download this repository
@@ -35,9 +38,10 @@ conan upload GBenchmark/1.1.0@iblis_ms/stable --all -r=local
 conan install --build
 ```
 
-#Supported platforms and compilers
+# Supported platforms and compilers
 
-##Windows 10 64bits
+## Windows 10 64bits
+
 CMake version: 3.8.1
 
 * MinGW x86_64
@@ -51,8 +55,10 @@ CMake version: 3.8.1
   * version: 2017
     - conan test_package -s compiler="Visual Studio" -s compiler.version=15 -s compiler.runtime=MD
 
-##Ubuntu 16.04 64bits
+## Ubuntu 16.04 64bits
+
 CMake version: 3.5.2
+
 * GCC
   * version: 4.8
     - conan test_package -s compiler=gcc -s compiler.version=4.8 -s compiler.libcxx=libstdc++
@@ -78,7 +84,8 @@ CMake version: 3.5.2
     - conan test_package -s compiler=clang -s compiler.version=4.0 -s compiler.libcxx=libstdc++
     - conan test_package -s compiler=clang -s compiler.version=4.0 -s compiler.libcxx=libstdc++11
 
-##Linter Warnings
+## Linter Warnings
+
 The field *settings* is initialized as list in *conanfile.py*, but it is replaced by Conan.io to a proper object. Therefore there are some warnings that *settings* list doesn't contain some methods, but it will contain during the runtime, so you don't have to worry about:
 
 > Linter warnings
