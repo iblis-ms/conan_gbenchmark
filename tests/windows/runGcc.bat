@@ -4,7 +4,10 @@ setlocal EnableDelayedExpansion
 
 SET "LIB_STD=%1"
 
-ECHO "------------------ test program: GCC $GCC_VERSION $LIB_STD ------------------"
+SET "CC=%GCC%"
+SET "CXX=%GPP%"
+
+ECHO "------------------ test program: GCC %GCC% %LIB_STD% ------------------"
 
 SET "CURRENT_DIR=%~dp0"
 SET "APP_DIR=%CURRENT_DIR%\..\app"
@@ -19,8 +22,6 @@ IF EXIST "%OUTPUT_DIR%" RD /q /s "%OUTPUT_DIR%"
 MKDIR %OUTPUT_DIR%
 CD %OUTPUT_DIR%
 
-SET "CC=%GCC%"
-SET "CXX=%GPP%"
 
 cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DSTDLIB=%LIB_STD% %APP_DIR% 
 IF %errorlevel% neq 0 EXIT /b %errorlevel%
