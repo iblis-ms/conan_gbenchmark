@@ -4,4 +4,4 @@ project(conanGoogleBenchmark)
 include(conanbuildinfo.cmake)
 CONAN_BASIC_SETUP()
 
-add_subdirectory("benchmark-1.1.0")
+add_subdirectory("benchmark-1.3.0")

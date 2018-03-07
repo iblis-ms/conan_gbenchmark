@@ -17,7 +17,7 @@ CD %REPO_BASE_DIR%
 start conan_server
 
 COPY %CURRENT_PATH%\..\server.conf %HOMEPATH%\.conan_server\server.conf
-CALL conan export iblis_ms/stable
+CALL conan export . GBenchmark/1.3.0@iblis_ms/stable
 
 SET FOUND_LOCAL_SERVER=
 FOR /f %%a in ('conan remote list ^| findstr /i http://localhost:9300') DO (
@@ -29,6 +29,6 @@ IF "%FOUND_LOCAL_SERVER%"=="" (
 ) 
 
 CALL conan user -p demo -r local demo
-CALL conan upload GBenchmark/1.1.0@iblis_ms/stable --all -r=local --force
+CALL conan upload GBenchmark/1.3.0@iblis_ms/stable --all -r=local --force
 
 CD %CURRENT_PATH%

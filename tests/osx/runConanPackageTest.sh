@@ -22,6 +22,6 @@ if [ ! -e "$CC" ]; then
 fi
 
 echo "----------------------- test package: CLANG: libc++ -----------------------"
-conan test_package -s compiler=$clangName -s compiler.version=$clangVersion -s compiler.libcxx=libc++
+conan test test_package -s compiler=$clangName -s compiler.version=$clangVersion -s compiler.libcxx=libc++ GBenchmark/1.3.0@iblis_ms/stable --build
 
 cd $currentDir

@@ -32,7 +32,7 @@ fi
 
 cd "$appDir"
 echo "conan install --build -s compiler=$compiler -s compiler.version=$compilerVersion -s compiler.libcxx=$stdlib"
-conan install --build -s compiler=$compiler -s compiler.version=$compilerVersion -s compiler.libcxx=$stdlib
+conan install . --build -s compiler=$compiler -s compiler.version=$compilerVersion -s compiler.libcxx=$stdlib
 
 if [ -d "$outputDir" ]
 then

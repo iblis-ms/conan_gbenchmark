@@ -13,6 +13,8 @@ cd $repoBaseDir
 
 export CXX=$clangCppBin
 export CC=$clangCcBin
+echo "export CXX=$clangCppBin"
+echo "export CC=$clangCcBin"
 
 if [ ! -e "$CXX" ]; then
   echo "NOT EXISTS: $CXX"
@@ -23,12 +25,14 @@ if [ ! -e "$CC" ]; then
   exit 1
 fi
 
+conan export . GBenchmark/1.3.0@iblis_ms/stable
+
 echo "----------------------- test package: CLANG: libc++ -----------------------"
-conan test_package -s compiler=$clangName -s compiler.version=$clangVersion -s compiler.libcxx=libc++
+conan test test_package -s compiler=$clangName -s compiler.version=$clangVersion -s compiler.libcxx=libc++ GBenchmark/1.3.0@iblis_ms/stable --build
 echo "----------------------- test package: CLANG: libstdc++ -----------------------"
-conan test_package -s compiler=$clangName -s compiler.version=$clangVersion -s compiler.libcxx=libstdc++
+conan test test_package -s compiler=$clangName -s compiler.version=$clangVersion -s compiler.libcxx=libstdc++ GBenchmark/1.3.0@iblis_ms/stable --build
 echo "----------------------- test package: CLANG: libstdc++11 -----------------------"
-conan test_package -s compiler=$clangName -s compiler.version=$clangVersion -s compiler.libcxx=libstdc++11
+conan test test_package -s compiler=$clangName -s compiler.version=$clangVersion -s compiler.libcxx=libstdc++11  GBenchmark/1.3.0@iblis_ms/stable --build
 
 ########################## GCC ##########################
 
@@ -45,8 +49,8 @@ if [ ! -e "$CC" ]; then
 fi
 
 echo "----------------------- test package: GCC: libstdc++ -----------------------"
-conan test_package -s compiler=gcc -s compiler.version=$gccVersion -s compiler.libcxx=libstdc++
+conan test test_package -s compiler=gcc -s compiler.version=$gccVersion -s compiler.libcxx=libstdc++ GBenchmark/1.3.0@iblis_ms/stable --build
 echo "----------------------- test package: GCC: libstdc++11 -----------------------"
-conan test_package -s compiler=gcc -s compiler.version=$gccVersion -s compiler.libcxx=libstdc++11
+conan test test_package -s compiler=gcc -s compiler.version=$gccVersion -s compiler.libcxx=libstdc++11 GBenchmark/1.3.0@iblis_ms/stable --build
 
 cd $currentDir
