@@ -11,7 +11,7 @@ SET "CURRENT_DIR=%~dp0"
 SET "APP_DIR=%CURRENT_DIR%\..\app"
 
 CD %APP_DIR%
-CALL conan install --build -s compiler="Visual Studio" -s compiler.version=%VISUAL_STUDIO_VERSION% -s compiler.runtime=MT
+CALL conan install . --build -s compiler="Visual Studio" -s compiler.version=%VISUAL_STUDIO_VERSION% -s compiler.runtime=MT
 IF %errorlevel% neq 0 EXIT /b %errorlevel%
 
 SET "OUTPUT_DIR=%CURRENT_DIR%\..\output_visual%"

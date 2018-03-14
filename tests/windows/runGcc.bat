@@ -13,7 +13,7 @@ SET "CURRENT_DIR=%~dp0"
 SET "APP_DIR=%CURRENT_DIR%\..\app"
 
 CD %APP_DIR%
-CALL conan install --build -s compiler=gcc -s compiler.version=%GCC_VERSION% -s compiler.libcxx=%LIB_STD%
+CALL conan install . --build -s compiler=gcc -s compiler.version=%GCC_VERSION% -s compiler.libcxx=%LIB_STD%
 IF %errorlevel% neq 0 EXIT /b %errorlevel%
 
 SET "OUTPUT_DIR=%CURRENT_DIR%\..\output_gcc_%LIB_STD%"

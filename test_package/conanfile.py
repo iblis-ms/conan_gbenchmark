@@ -3,20 +3,18 @@
 
 from conans import ConanFile, CMake
 import os
-import sys
 
 channel = os.getenv("CONAN_CHANNEL", "stable")
 username = os.getenv("CONAN_USERNAME", "iblis_ms")
 
 class GbenchmarkTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
-    requires = "GBenchmark/1.1.0@%s/%s" % (username, channel)
+    requires = "GBenchmark/1.3.0@%s/%s" % (username, channel)
     generators = "cmake"
 
     def build(self):
         cmake = CMake(self)
-        sys.stdout.write("cmake %s %s" % (cmake.command_line, self._conanfile_directory))
-        cmake.configure(source_dir=self.conanfile_directory, build_dir="./")
+        cmake.configure()
         cmake.build()
 
     def imports(self):
