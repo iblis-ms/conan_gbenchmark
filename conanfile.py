@@ -1,7 +1,7 @@
 # Author: Marcin Serwach
 # https://github.com/iblis-ms/conan_gbenchmark
 
-from conans import ConanFile, CMake
+from conans import ConanFile, CMake, tools
 import os
 import sys
 import shutil
@@ -26,16 +26,9 @@ class GbenchmarkConan(ConanFile):
     buildFolder = '_build'
 
     def source(self):
-        folderNameDownloaded = 'benchmark'
-        folderNameWithVersion = 'benchmark-%s' % self.version
-     
-        if os.environ.get('APPVEYOR') == 'True':
-            git = '\"C:\\Program Files\\Git\\mingw64\\bin\\git.exe\"' # git is not present in PATH on AppVeyor
-        else:
-            git = 'git'
-        self.run('%s clone https://github.com/google/benchmark.git' % git)
-        shutil.move(folderNameDownloaded, folderNameWithVersion)
-        self.run("cd %s && %s checkout tags/v%s -b %s" % (folderNameWithVersion, git, self.version, self.version))
+        zipFileName = "v%s.zip" % self.version
+        tools.download("https://github.com/google/benchmark/archive/%s" % zipFileName, zipFileName)
+        tools.unzip(zipFileName)
     
     def build(self):
         cmake = CMake(self)
@@ -46,6 +39,12 @@ class GbenchmarkConan(ConanFile):
 
         if self.settings.compiler == 'clang' and str(self.settings.compiler.libcxx) == 'libc++':
             cmake.definitions['BENCHMARK_USE_LIBCXX'] = 'YES'
+
+        if str(self.settings.compiler) in ['gcc', 'apple-clang', 'clang', 'sun-cc']:
+            if str(self.settings.arch) in ['x86_64', 'sparcv9']:
+                cmake.definitions['BENCHMARK_BUILD_32_BITS'] = 'OFF'
+            elif str(self.settings.arch) in ['x86', 'sparc']:
+                cmake.definitions['BENCHMARK_BUILD_32_BITS'] = 'YES'
 
         sys.stdout.write("cmake " + str(cmake.command_line) + "\n")
 
