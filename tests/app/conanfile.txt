@@ -1,5 +1,0 @@
-[requires]
-GBenchmark/1.3.0@iblis_ms/stable
-
-[generators]
-cmake
